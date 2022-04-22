@@ -1,5 +1,5 @@
 #!/bin/sh
-echo ------------------$'\n'AUR version check$'\n'------------------
+echo ------------------$'\n'AUR update check$'\n'------------------
 set *
 for i; do
 	if [[ $(echo $i | head -c 1) == "#" ]]; then
@@ -11,10 +11,12 @@ for i; do
 				curl -s https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$i | {
 					while IFS= read -r iline; do
 						if [[ $(echo $iline | cut -b 1-7) == "pkgver=" ]]; then
+							line=$(echo $line | cut -b 8-)
+							iline=$(echo $iline | cut -b 8-)
 							if [[ $line == $iline ]]; then
-								echo ✔ $i
+								echo ✓ $i $line
 							else
-								echo ✘ $i
+								echo ✗ $i $line \-\> $iline
 							fi
 							break
 						fi
