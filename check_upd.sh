@@ -1,5 +1,6 @@
 #!/bin/sh
 echo ------------------$'\n'AUR update check$'\n'------------------
+cd $(dirname $0)
 set *
 for i; do
 	if [[ $(echo $i | head -c 1) == "#" ]]; then
