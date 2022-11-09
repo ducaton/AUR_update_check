@@ -6,7 +6,7 @@ for i; do
 	if [[ $(echo $i | head -c 1) == "#" ]]; then
 		continue
 	fi
-	if [ -d "$i" ]; then
+	if [ -d "$i" ] && [ -f "$i"/PKGBUILD ]; then
 		while IFS= read -r line; do
 			if [[ $(echo $line | cut -b 1-7) == "pkgver=" ]]; then
 				curl -s https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$i | {
